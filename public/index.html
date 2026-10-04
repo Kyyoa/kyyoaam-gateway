@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KYYOA AM Gateway</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/app.css?v=1.1.3">
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<section id="login" class="view center">
+  <div class="frame card login-card">
+    <p class="mono eyebrow">ALIGHT MOTION GATEWAY</p>
+    <h1 class="display wordmark">KYYOA <span class="am">AM</span></h1>
+    <div class="rule-label"><span>V1.0.0 &middot; POOL BERSAMA</span></div>
+    <form id="login-form" autocomplete="off">
+      <label class="mono" for="pass">SANDI</label>
+      <input class="mono" type="password" id="pass" placeholder="ketik sandi" required>
+      <button class="btn" type="submit">MASUK</button>
+    </form>
+    <p class="mono fine" id="login-msg">&nbsp;</p>
+  </div>
+  <p class="mono slogan">LEARN FAST. BUILD LOUD. STAY HUMAN.</p>
+</section>
+
+<!-- ============ DASHBOARD ============ -->
+<section id="app" class="view" hidden>
+  <header class="topbar frame-thin">
+    <div class="brand">
+      <span class="display wordmark-sm">KYYOA <span class="am">AM</span></span>
+      <span class="mono" id="pool-count">POOL &middot; 0 SESI</span>
+    </div>
+    <button class="btn ghost" id="logout">KELUAR</button>
+  </header>
+
+  <div class="hero">
+    <h1 class="display">Gateway Premium Alight Motion</h1>
+    <div class="rule-label"><span>WIELDED BY ONE HUMAN &middot; POWERED BY MANY MINDS</span></div>
+    <p class="mono note" id="prem-note" hidden>PREMIUM SIAP &middot; TOKEN AKTIF</p>
+  </div>
+
+  <!-- 3 langkah -->
+  <div class="steps">
+    <section class="frame card step">
+      <div class="step-head"><span class="step-num display">1</span>
+        <h2 class="display">Kirim Magic Link</h2></div>
+      <p class="mono fine">LINK DIKIRIM KE INBOX / SPAM &middot; MASUK &plusmn;5 DTK</p>
+      <input class="mono" type="email" id="e1" placeholder="email@contoh.com">
+      <button class="btn" id="b1">KIRIM LINK</button>
+      <p class="mono fine" id="s1">&nbsp;</p>
+    </section>
+
+    <section class="frame card step">
+      <div class="step-head"><span class="step-num display">2</span>
+        <h2 class="display">Verifikasi &amp; Aktifkan</h2></div>
+      <p class="mono fine">PASTE LINK UTUH DARI EMAIL, ATAU KODE OOB-nya</p>
+      <input class="mono" type="email" id="e2" placeholder="email yang sama">
+      <textarea class="mono" id="l2" rows="3" placeholder="https://... atau kode"></textarea>
+      <button class="btn" id="b2">VERIFIKASI</button>
+      <div class="result" id="r2" hidden></div>
+    </section>
+
+    <section class="frame card step">
+      <div class="step-head"><span class="step-num display">3</span>
+        <h2 class="display">Premium Ulang</h2></div>
+      <p class="mono fine">RE-AKTIFASI SESI TERSIMPAN &middot; ORDER ID BERUBAH, AKSES TETAP</p>
+      <input class="mono" type="email" id="e3" placeholder="email sesi tersimpan">
+      <button class="btn" id="b3">AKTIFKAN</button>
+      <div class="result" id="r3" hidden></div>
+    </section>
+  </div>
+
+  <!-- sesi pool -->
+  <section class="frame card panel">
+    <div class="panel-head">
+      <h2 class="display">Sesi Pool Bersama</h2>
+      <p class="mono fine">SEMUA ORANG MEMAKAI SESI YANG SAMA &middot; TOKEN TIDAK DITAMPILKAN &middot; HAPUS BUTUH SANDI ADMIN</p>
+    </div>
+    <div class="tablewrap">
+      <table id="tbl">
+        <thead><tr class="mono">
+          <th>EMAIL</th><th>UID</th><th>STATUS</th><th>ORDER</th><th>TERAKHIR</th><th></th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="mono empty" id="empty">BELUM ADA SESI &mdash; MULAI DARI LANGKAH 1.</p>
+  </section>
+
+  <footer class="mono footer">KYYOA AM GATEWAY &middot; LEARN FAST. BUILD LOUD. STAY HUMAN.</footer>
+</section>
+
+<div id="toast" class="frame toast mono" hidden></div>
+<script src="/app.js?v=1.1.3"></script>
+</body>
+</html>

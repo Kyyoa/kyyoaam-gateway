@@ -1,0 +1,13 @@
+{
+  "name": "kyyoaam-gateway",
+  "version": "1.0.0",
+  "description": "kyyoaAM gateway - Alight Motion premium gateway, stdlib HTTP + web UI",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.9"
+  }
+}

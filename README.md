@@ -7,6 +7,8 @@ login sekali, status premium dicek ke provider, sesi dipakai rame-rame tanpa log
 > (`lib/auth.js`) di sini berupa **stub** — interface sama, implementasi dikosongkan.
 > Versi produksi yang jalan live tetap private.
 
+![Dashboard kyyoaAM gateway](images/dashboard.png)
+
 ## Fitur
 
 - 🔐 Login web (cookie HMAC-SHA256, 12 jam) + API key (`X-Gateway-Key`)

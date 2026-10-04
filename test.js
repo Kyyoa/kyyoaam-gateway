@@ -101,6 +101,19 @@ t('emailOk: valid / invalid', () => {
   assert.ok(!v.emailOk(null))
 })
 
+// ---- temp-mail blocklist ----
+t('isDisposable: temp-mail ditolak, email asli lolos', () => {
+  for (const d of ['caps7.com', 'tempmail.com', 'yopmail.com', 'mailinator.com', '10minutemail.com', 'guerrillamail.com']) {
+    assert.ok(v.isDisposable('x@' + d), d + ' harus ditolak')
+  }
+  assert.ok(v.isDisposable('x@sub.mail.tm'), 'subdomain disposable harus ditolak')
+  assert.ok(v.isDisposable('x@CAPS7.COM'), 'case-insensitive')
+  assert.ok(!v.isDisposable('user@gmail.com'), 'gmail harus lolos')
+  assert.ok(!v.isDisposable('user@yahoo.co.id'), 'yahoo harus lolos')
+  assert.ok(!v.isDisposable('a@b.co'), 'domain biasa harus lolos')
+  assert.ok(v.isDisposable('x@evil.com', 'evil.com'), 'BLOCKED_DOMAINS env harus kepakai')
+})
+
 // ---- store roundtrip (write -> list masked -> delete) ----
 t('store: put/get/list/del + email & token masked di list', () => {
   const e = 'selftest@localhost'

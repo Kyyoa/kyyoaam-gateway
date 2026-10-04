@@ -42,7 +42,7 @@ setInterval(() => {
 const auth = require('./lib/auth')
 const store = require('./lib/store')
 const ratelimit = require('./lib/ratelimit')
-const { emailOk } = require('./lib/validate')
+const { emailOk, isDisposable } = require('./lib/validate')
 
 const HOST = process.env.HOST || '127.0.0.1'
 const PORT = parseInt(process.env.PORT || '20140', 10)
@@ -188,6 +188,10 @@ async function handle(req, res) {
       }
       const b = await readBody(req)
       if (!emailOk(b.email)) return finish(400, { ok: false, why: 'email tidak valid' })
+      // temp-mail dilarang: loopback/e2e exempt, publik ditolak
+      if (!/^(127\.|::1$|::ffff:127)/.test(ipOf(req)) && isDisposable(b.email, process.env.BLOCKED_DOMAINS)) {
+        return finish(400, { ok: false, why: 'email sekali pakai tidak diterima — pakai email asli (gmail/yahoo/dll)' })
+      }
       const r = await auth.link(b.email)
       return finish(r.ok ? 200 : 502, r)
     }
@@ -195,6 +199,10 @@ async function handle(req, res) {
     if (route === 'POST /verify') {
       const b = await readBody(req)
       if (!emailOk(b.email)) return finish(400, { ok: false, why: 'email tidak valid' })
+      // lapis 2: temp-mail dilarang juga di verify (jaga jalur langsung tanpa /link)
+      if (!/^(127\.|::1$|::ffff:127)/.test(ipOf(req)) && isDisposable(b.email, process.env.BLOCKED_DOMAINS)) {
+        return finish(400, { ok: false, why: 'email sekali pakai tidak diterima — pakai email asli (gmail/yahoo/dll)' })
+      }
       if (!b.link || String(b.link).length > 2048) {
         return finish(400, { ok: false, why: 'link kosong / kepanjangan' })
       }

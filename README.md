@@ -15,7 +15,8 @@ login sekali, status premium dicek ke provider, sesi dipakai rame-rame tanpa log
 - 🎫 Magic-link flow: kirim link → verifikasi → sesi tersimpan di pool
 - 👥 Pool bersama (cap `MAX_POOL`), email di-mask server-side (`agu**@gmail.com`)
 - 🛡️ Anti-abuse: kuota bikin akun/hari/IP, cooldown re-aktivasi per sesi,
-  rate limit global + per-endpoint, hapus sesi butuh sandi admin
+  rate limit global + per-endpoint, hapus sesi butuh sandi admin,
+  **email sekali pakai (temp-mail) ditolak** (+ `BLOCKED_DOMAINS` di `.env`)
 - 🎨 UI gaya poster: parchment + navy ink, serif + typewriter mono
 - 📦 Stdlib-first — 1 dependensi (`axios`), Node 20+
 
